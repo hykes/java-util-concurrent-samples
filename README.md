@@ -58,7 +58,7 @@ LinkedBlockingQueue 内部以一个链式结构(链接节点)对其元素进行�
 
 #### DelayQueue.class，阻塞队列，并且元素是Delay的子类，保证元素在达到一定时间后才可以取得到
 
-DelayQueue 对元素进行持有直到一个特定的延迟到期。注入其中的元素必须实现 java.util.concurrent.Delayed 接口。
+DelayQueue是一个无界的BlockingQueue，用于放置实现了 java.util.concurrent.Delayed 接口的对象，其中的对象只能在其到期时才能从队列中取走。这种队列是有序的，即队头对象的延迟到期时间最长。注意：不能将null元素放置到这种队列中。
 
 #### PriorityBlockingQueue.class，优先级阻塞队列
 
