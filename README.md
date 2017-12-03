@@ -84,7 +84,22 @@ SynchronousQueue 是一个特殊的队列，它的内部同时只能够容纳单
 
 ### BlockingDeque.class，双端阻塞队列接口
 
+![原理](/images/BlockingDeque.png)
+
+一个线程可以插入元素到队列的任一端。如果队列full,那么线程将会阻塞，直到其他线程从队列中取出一个元素为止。如果队列empty,那么从队列中取元素的线程将会阻塞，直到其他线程插入一个元素为止。
+
+|  -  |   抛异常    | 特定值  | 阻塞 |  超时  |
+| --- |:----------:| -----:|-----:|-----:|
+| 插入 | addFirst(o)     | offerFirst(o) | pullFirst(o) | offerFirst(o, timeout, timeunit) |
+| 移除 | removeFirst(o)  | pollFirst(o) | takeFirst(o) | pollFirst(timeout, timeunit) |
+| 检查 | getFirst(o) | peekFirst(o) | - | - |
+| 插入 | addLast(o)     | offerLast(o) | pullLast(o) | offerLast(o, timeout, timeunit) |
+| 移除 | removeLast(o)  | pollLast(o) | takeLast(o) | pollLast(timeout, timeunit) |
+| 检查 | getLast(o) | peekLast(o) | - | - |
+
 #### LinkedBlockingDeque.class，阻塞双端队列，链表实现
+
+[example]([example](https://github.com/hykes/java-util-concurrent-samples/blob/047b8e14d923b645befa61da6b91f4d0f9aa5b2e/src/main/java/cn/hykes/concurrent/BlockingDeque/LinkedBlockingDequeTest.java))
 
 ## 非阻塞队列：
 
