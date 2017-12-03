@@ -52,13 +52,19 @@ BlockingQueue 具有 4 组不同的方法用于插入、移除以及对队列中
 
 ArrayBlockingQueue 是一个有界的阻塞队列，其内部实现是将对象放到一个数组里。有界也就意味着，它不能够存储无限多数量的元素。它有一个同一时间能够存储元素数量的上限。你可以在对其初始化的时候设定这个上限，但之后就无法对这个上限进行修改了(译者注：因为它是基于数组实现的，也就具有数组的特性：一旦初始化，大小就无法修改)。
 
+[example](https://github.com/hykes/java-util-concurrent-samples/blob/047b8e14d923b645befa61da6b91f4d0f9aa5b2e/src/main/java/cn/hykes/concurrent/BlockingQueue/ArrayBlockingQueueTest.java)
+
 #### LinkedBlockingQueue.class，阻塞队列，链表实现
 
 LinkedBlockingQueue 内部以一个链式结构(链接节点)对其元素进行存储。如果需要的话，这一链式结构可以选择一个上限。如果没有定义上限，将使用 Integer.MAX_VALUE 作为上限。
 
+[example](https://github.com/hykes/java-util-concurrent-samples/blob/047b8e14d923b645befa61da6b91f4d0f9aa5b2e/src/main/java/cn/hykes/concurrent/BlockingQueue/LinkedBlockingQueueTest.java)
+
 #### DelayQueue.class，阻塞队列，并且元素是Delay的子类，保证元素在达到一定时间后才可以取得到
 
 DelayQueue是一个无界的BlockingQueue，用于放置实现了 java.util.concurrent.Delayed 接口的对象，其中的对象只能在其到期时才能从队列中取走。这种队列是有序的，即队头对象的延迟到期时间最长。注意：不能将null元素放置到这种队列中。
+
+[example](https://github.com/hykes/java-util-concurrent-samples/blob/047b8e14d923b645befa61da6b91f4d0f9aa5b2e/src/main/java/cn/hykes/concurrent/BlockingQueue/DelayQueueTest.java)
 
 #### PriorityBlockingQueue.class，优先级阻塞队列
 

@@ -1,5 +1,6 @@
 package cn.hykes.concurrent.BlockingQueue;
 
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
@@ -23,13 +24,14 @@ public class DelayQueueTest {
          */
         private final String name;
 
-        public Task(long timeout, String name) {
-            this.time = System.nanoTime() + timeout;
+        public Task(long timeout, String name, long createTime) {
+            this.time = createTime + TimeUnit.NANOSECONDS.convert(timeout, TimeUnit.NANOSECONDS);
             this.name = name;
         }
 
         /**
          * 返回与此对象相关的剩余延迟时间，以给定的时间单位表示
+         * 过期时间 - 当前时间
          */
         @Override
         public long getDelay(TimeUnit unit) {
@@ -43,25 +45,32 @@ public class DelayQueueTest {
             if(o == this) return 0;
             Task s = (Task) o;
             if (this.time > s.time) {
-                return -1;
+                return 1;
             }else if (this.time == s.time) {
                 return 0;
             }else {
-                return 1;
+                return -1;
             }
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         BlockingQueue<Task> delayQueue = new DelayQueue();
+
+        // 为了方便演示，设置创建时间是同一个时间
+        long createTime = System.nanoTime();
         for(int i=0;i<5;i++){
-            delayQueue.add(new Task(10 - i, String.valueOf(i)));
-            System.out.println(String.format("new task:(%d), timeout:(%d)", i, 10 - i));
+            // 创建时间相同，则超时时间就是输出顺序
+            int timeout = new Random().nextInt(120);
+            delayQueue.add(new Task(timeout, String.valueOf(i), createTime));
+            System.out.println(String.format("new task:(%d), timeout:(%d)", i, timeout));
         }
 
         do{
             Task task = delayQueue.poll();
-            System.out.println(task.name);
+            if (task != null) {
+                System.out.println(String.format("run task:(%s)", task.name));
+            }
         }while (delayQueue.size()!= 0);
     }
 
