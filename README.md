@@ -70,9 +70,13 @@ DelayQueue是一个无界的BlockingQueue，用于放置实现了 java.util.conc
 
 PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.util.PriorityQueue 一样的排序规则。你无法向这个队列中插入 null 值。所有插入到 PriorityBlockingQueue 的元素必须实现 java.lang.Comparable 接口。因此该队列中元素的排序就取决于你自己的 Comparable 实现。
 
+[example](https://github.com/hykes/java-util-concurrent-samples/blob/c6161af5f644707783f9e2ba24d8f58801231359/src/main/java/cn/hykes/concurrent/BlockingQueue/PriorityBlockingQueueTest.java)
+
 #### SynchronousQueue.class，同步队列，但是队列长度为0，生产者放入队列的操作会被阻塞，直到消费者过来取，所以这个队列根本不需要空间存放元素；有点像一个独木桥，一次只能一人通过，还不能在桥上停留
 
 SynchronousQueue 是一个特殊的队列，它的内部同时只能够容纳单个元素。如果该队列已有一元素的话，试图向队列中插入一个新元素的线程将会阻塞，直到另一个线程将该元素从队列中抽走。同样，如果该队列为空，试图向队列中抽取一个元素的线程将会阻塞，直到另一个线程向队列中插入了一条新的元素。据此，把这个类称作一个队列显然是夸大其词了。它更多像是一个汇合点。
+
+[example](https://github.com/hykes/java-util-concurrent-samples/blob/c6161af5f644707783f9e2ba24d8f58801231359/src/main/java/cn/hykes/concurrent/BlockingQueue/SynchronousQueueTest.java)
 
 #### 阻塞队列原理
 
